@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Valentine</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <!-- Background Slideshow -->
+  <div class="slideshow">
+    <div class="slide" style="background-image: url('./assets/bahamas.jpeg')"></div>
+    <div class="slide" style="background-image: url('./assets/Pink sand.jpeg')"></div>
+    <div class="slide" style="background-image: url('./assets/bali swing.jpeg')"></div>
+  </div>
+  <div class="overlay"></div>
+
+  <div class="container" id="main-content">
+    <h1 id="question">Will you be my Valentine?</h1>
+    <div class="buttons" id="btn-group">
+      <button class="btn btn-yes" id="yes-btn">Yes</button>
+      <button class="btn btn-no" id="no-btn">No</button>
+    </div>
+  </div>
+
+  <!-- Hidden Photo Animation Container -->
+  <div class="photo-container" id="photo-container">
+    <div class="photo-wrapper photo-left">
+      <img src="./assets/me.jpeg" alt="Me" id="user-photo">
+    </div>
+    <div class="photo-wrapper photo-right">
+      <img src="./assets/mine.jpeg" alt="You" id="partner-photo">
+    </div>
+  </div>
+
+  <div class="final-message" id="final-msg">Every adventure is better with you. ❤️</div>
+
+  <audio id="bg-music" loop>
+    <!-- Placeholder, logic will handle playback -->
+    <source src="./assets/music.mp3" type="audio/mpeg">
+  </audio>
+
+  <script type="module" src="/main.js"></script>
+</body>
+
+</html>

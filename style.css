@@ -1,0 +1,260 @@
+:root {
+    --primary: #ff4d6d;
+    --secondary: #ff8fa3;
+    --accent: #fff0f3;
+    --text: #590d22;
+    --overlay: rgba(0, 0, 0, 0.3);
+    --glass: rgba(255, 255, 255, 0.15);
+    --glass-border: rgba(255, 255, 255, 0.2);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    color: #fff;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+    background-color: #000;
+}
+
+/* Background Slideshow */
+.slideshow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    background-color: #000;
+    /* Dark background for letterboxed images */
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: contain;
+    /* Fit to screen */
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+}
+
+.slide.active {
+    opacity: 1;
+}
+
+/* Fallback backgrounds if images fail/loading */
+.slide:nth-child(1) {
+    background-color: #0077be;
+}
+
+/* Bahamas blue */
+.slide:nth-child(2) {
+    background-color: #ff9e80;
+}
+
+/* Bali sunset */
+.slide:nth-child(3) {
+    background-color: #ffc0cb;
+}
+
+/* Komodo pink */
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.4));
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Main Container */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    text-align: center;
+    position: relative;
+    z-index: 10;
+}
+
+h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    margin-bottom: 2rem;
+    opacity: 1;
+    transition: opacity 0.5s;
+}
+
+/* Buttons */
+.buttons {
+    display: flex;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.btn {
+    padding: 1rem 3rem;
+    font-size: 1.5rem;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+}
+
+.btn-yes {
+    background: var(--primary);
+    color: white;
+    box-shadow: 0 4px 15px rgba(255, 77, 109, 0.4);
+}
+
+.btn-yes:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(255, 77, 109, 0.6);
+}
+
+.btn-no {
+    background: white;
+    color: var(--text);
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+    position: relative;
+    /* Crucial for moving it */
+}
+
+/* Photo Merge Animation Area */
+.photo-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80vw;
+    height: 60vh;
+    pointer-events: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+}
+
+.photo-wrapper {
+    position: absolute;
+    width: 300px;
+    height: 400px;
+    /* Portrait aspect ratio */
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border: 5px solid white;
+    transition: transform 4s cubic-bezier(0.25, 1, 0.5, 1);
+    /* Slowed down to 4s */
+}
+
+.photo-left {
+    transform: translateX(-150vw) rotate(-10deg);
+    background-color: #ddd;
+    /* Placeholder */
+}
+
+.photo-right {
+    transform: translateX(150vw) rotate(10deg);
+    background-color: #ddd;
+    /* Placeholder */
+}
+
+.photo-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Merged State */
+.merged .photo-left {
+    transform: translateX(-15px) rotate(-5deg) scale(1.1);
+    z-index: 1;
+}
+
+.merged .photo-right {
+    transform: translateX(15px) rotate(5deg) scale(1.1);
+    z-index: 2;
+}
+
+.final-message {
+    position: absolute;
+    bottom: 10%;
+    width: 100%;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 600;
+    color: white;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1s 4.5s, transform 1s 4.5s;
+    /* Delayed for after photo merge (4.5s) */
+}
+
+.merged~.final-message {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Floating Hearts */
+.heart {
+    position: fixed;
+    color: var(--primary);
+    opacity: 0;
+    pointer-events: none;
+    animation: floatUp 4s ease-in infinite;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(100vh) scale(0.5);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translateY(-10vh) scale(1.5);
+        opacity: 0;
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2rem;
+        padding: 0 1rem;
+    }
+
+    .btn {
+        padding: 0.8rem 2rem;
+        font-size: 1.2rem;
+    }
+
+    .photo-wrapper {
+        width: 40vw;
+        height: 55vw;
+    }
+}
