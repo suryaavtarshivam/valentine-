@@ -70,15 +70,16 @@ document.addEventListener('DOMContentLoaded', () => {
     // Audio Logic
     const music1 = document.getElementById('bg-music-1');
     const music2 = document.getElementById('bg-music-2');
-    let musicStarted = false;
+    const enterOverlay = document.getElementById('enter-overlay');
 
-    // Attempt to play music1 on first interaction
-    document.body.addEventListener('click', () => {
-        if (!musicStarted) {
-            music1.play().catch(e => console.log("Audio 1 play failed", e));
-            musicStarted = true;
-        }
-    }, { once: true });
+    // Start Experience on Overlay Click
+    enterOverlay.addEventListener('click', () => {
+        music1.play().catch(e => console.log("Audio 1 play failed", e));
+        enterOverlay.style.opacity = '0';
+        setTimeout(() => {
+            enterOverlay.style.display = 'none';
+        }, 500);
+    });
 
     yesBtn.addEventListener('click', () => {
         // 1. Fade out question and buttons
