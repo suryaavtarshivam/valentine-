@@ -66,7 +66,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const mainContent = document.getElementById('main-content');
     const photoContainer = document.getElementById('photo-container');
     const finalMsg = document.getElementById('final-msg');
-    const audio = document.getElementById('bg-music');
+
+    // Audio Logic
+    const music1 = document.getElementById('bg-music-1');
+    const music2 = document.getElementById('bg-music-2');
+    let musicStarted = false;
+
+    // Attempt to play music1 on first interaction
+    document.body.addEventListener('click', () => {
+        if (!musicStarted) {
+            music1.play().catch(e => console.log("Audio 1 play failed", e));
+            musicStarted = true;
+        }
+    }, { once: true });
 
     yesBtn.addEventListener('click', () => {
         // 1. Fade out question and buttons
@@ -84,8 +96,9 @@ document.addEventListener('DOMContentLoaded', () => {
             photoContainer.classList.add('merged');
         }, 100);
 
-        // 3. Play Music (if source existed)
-        audio.play().catch(e => console.log("Audio play failed (interaction needed or no src)", e));
+        // 3. Switch Music
+        music1.pause();
+        music2.play().catch(e => console.log("Audio 2 play failed", e));
 
         // 4. Start Slideshow
         startSlideshow();
